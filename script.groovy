@@ -1,5 +1,15 @@
-def buildApp() {
-     echo 'building app...'
+def buildJar() {
+     echo 'building Jar file...'
+     sh 'mvn package'
+}
+
+def buildImg() {
+    echo 'building docker image ...'
+    withCredentials([usernamePassword(credentialsID: 'dockerhub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+        sh 'docker build -t dockerysf/my-app:3.0 .'
+        sh "echo $PASS | docker login -u $USER --password-stdin"
+        sh 'docker push dockerysf/my-app:3.0'
+    }
 }
 
 def testApp() {
