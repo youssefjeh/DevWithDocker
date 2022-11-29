@@ -1,5 +1,7 @@
 def buildJar() {
      echo 'building Jar file...'
+     sh 'mvn install:install-file -DgroupId=javax.jms -DartifactId=jms -Dversion=1.1 -Dpackaging=jar -Dfile=jms-1.1.jar'
+     sh 'mvn install:install-file -DgroupId="javax.jms" -DartifactId="jms" -Dversion="1.1" -Dpackaging="jar" -Dfile="jms-1.1.jar"'
      sh 'mvn package'
 }
 
