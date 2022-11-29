@@ -5,8 +5,8 @@ pipeline {
     choice(name: 'VERSION' , choices: ['1.1.0', '1.2.0' , '1.3.0'], description: '')
     booleanParam(name: 'executeTests' , defaultValue: true, description: '')
   }
-  tools {
-    maven 'maven-3.8'
+  // tools {
+   // maven 'maven-3.8'
   }
     
   stages {
@@ -28,11 +28,11 @@ pipeline {
       }
     }
 
-    stage("build docker image") {
+   // stage("build docker image") {
       
-      steps {
-        script{
-            gv.buildImg()
+     // steps {
+       // script{
+         //   gv.buildImg()
         }
       }
     }
