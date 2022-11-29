@@ -5,10 +5,7 @@ pipeline {
     choice(name: 'VERSION' , choices: ['1.1.0', '1.2.0' , '1.3.0'], description: '')
     booleanParam(name: 'executeTests' , defaultValue: true, description: '')
   }
-  // tools {
-   // maven 'maven-3.8'
- // }
-    
+  
   stages {
 
     stage("init"){
@@ -19,23 +16,14 @@ pipeline {
         }
     }
     
-    stage("build Jar file") {
+    stage("build") {
       
       steps {
         script{
-            gv.buildJar()
+            gv.buildApp()
         }
       }
     }
-
-   // stage("build docker image") {
-      
-     // steps {
-       // script{
-         //   gv.buildImg()
-       // }
-      //}
-    //}
     
     stage("test") {
       
@@ -57,13 +45,12 @@ pipeline {
             message "Select env to deploy to"
             ok "Done"
             parameters {
-                choice(name: 'ENV' , choices: ['dev', 'staging' , 'prod'], description: '')
+                choice(name: 'ENV' , choices: ['dev', 'staging' , 'prof'], description: '')
             }
         }
       
       steps {
         script{
-          // env.ENV = input message: "Select env to deploy to", ok "Done", parameters: [choice(name: 'ENV' , choices: ['dev', 'staging' , 'prod'], description: '')]
             gv.deployApp()
             echo "deploying to ${ENV}"
         }
