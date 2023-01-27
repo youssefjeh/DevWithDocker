@@ -4,13 +4,17 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building application...'
-                sh 'npm install'
+                dir('DoApp'){
+                    sh 'npm install'
+                }
             }
         }
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh 'npm test'
+                dir('DoApp'){
+                    sh 'npm test'
+                }
             }
         }
         stage('Deploy') {
