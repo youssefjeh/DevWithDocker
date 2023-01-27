@@ -19,11 +19,11 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Pushing Docker image to DockerHub...'
-                sh "docker build -t youssefjeh/DevWithDocker:latest ."
+                echo 'Building Docker image...'
+                sh "docker build -t youssefjeh/nodejsauto:latest ."
                 echo 'Pushing Docker image to DockerHub...'
                 withCredentials([usernamePassword(credentialsId:'dockerhub-rep', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                    sh "docker tag youssefjeh/my-app:latest dockerysf/autnodejs:latest"
+                    sh "docker tag youssefjeh/nodejsauto:latest dockerysf/autnodejs:latest"
                     sh "echo $PASS | docker login -u $USER --password-stdin"
                     sh "docker push dockerysf/autnodejs:latest"
                 }
